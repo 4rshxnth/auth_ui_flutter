@@ -109,7 +109,7 @@ class _SignupState extends State<Signup> {
               ),
               SizedBox(height: 5),
               TextFormField(
-                validator: (value) {},
+                controller: confirmpassordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -135,8 +135,9 @@ class _SignupState extends State<Signup> {
                     return "This field is required";
                   }
                   if (value != passwordController.text) {
-                    return 'Password do not ';
+                    return 'Password must be atleast * characters';
                   }
+                  return null;
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
