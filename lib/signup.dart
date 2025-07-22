@@ -1,4 +1,5 @@
 import 'package:auth_ui_flutter/login.dart';
+import 'package:auth_ui_flutter/services.dart';
 import 'package:flutter/material.dart';
 
 class Signup extends StatefulWidget {
@@ -109,6 +110,15 @@ class _SignupState extends State<Signup> {
               ),
               SizedBox(height: 5),
               TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password is required';
+                  }
+                  if (value.length < 8) {
+                    return 'Password must be 8 characters';
+                  }
+                  return null;
+                },
                 controller: confirmpassordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -135,7 +145,7 @@ class _SignupState extends State<Signup> {
                     return "This field is required";
                   }
                   if (value != passwordController.text) {
-                    return 'Password must be atleast * characters';
+                    return 'Password must be atleast 8 characters';
                   }
                   return null;
                 },
@@ -150,7 +160,17 @@ class _SignupState extends State<Signup> {
                 height: 70,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (formkey.currentState!.validate()) {
+                      signup(
+                        Username: usernameController.text,
+                        Email: emailController.text,
+                        Password: passwordController.text,
+                        ConfirmPassword: confirmpassordController.text,
+                        context: context,
+                      );
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     side: BorderSide(color: Colors.black, width: 1),
