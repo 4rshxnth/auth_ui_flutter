@@ -17,7 +17,6 @@ Future<void> signup({
       context,
     ).showSnackBar(SnackBar(content: Text('Account Created Successfully')));
   } catch (e) {
-    print(e);
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(e.toString())));
