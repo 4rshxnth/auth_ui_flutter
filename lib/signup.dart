@@ -13,7 +13,7 @@ class _SignupState extends State<Signup> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmpassordController = TextEditingController();
+  TextEditingController confirmPassordController = TextEditingController();
   final formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -81,6 +81,7 @@ class _SignupState extends State<Signup> {
               ),
               SizedBox(height: 5),
               TextFormField(
+                controller: emailController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Enter your email";
@@ -114,12 +115,12 @@ class _SignupState extends State<Signup> {
                   if (value == null || value.isEmpty) {
                     return 'Password is required';
                   }
-                  if (value.length < 8) {
+                  if (value.length != 8) {
                     return 'Password must be 8 characters';
                   }
                   return null;
                 },
-                controller: confirmpassordController,
+                controller: passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -140,12 +141,13 @@ class _SignupState extends State<Signup> {
               ),
               SizedBox(height: 5),
               TextFormField(
+                controller: confirmPassordController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "This field is required";
                   }
                   if (value != passwordController.text) {
-                    return 'Password must be atleast 8 characters';
+                    return 'do not match';
                   }
                   return null;
                 },
@@ -166,7 +168,7 @@ class _SignupState extends State<Signup> {
                         Username: usernameController.text,
                         Email: emailController.text,
                         Password: passwordController.text,
-                        ConfirmPassword: confirmpassordController.text,
+                        ConfirmPassword: confirmPassordController.text,
                         context: context,
                       );
                     }

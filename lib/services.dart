@@ -15,7 +15,44 @@ Future<void> signup({
     );
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(SnackBar(content: Text('User Created Successfully')));
+    ).showSnackBar(SnackBar(content: Text('Account Created Successfully')));
+  } catch (e) {
+    print(e);
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(e.toString())));
+  }
+}
+
+Future<void> login({
+  required String Email,
+  required String Password,
+  required BuildContext context,
+}) async {
+  try {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: Email,
+      password: Password,
+    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Login Successful')));
+  } catch (e) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(e.toString())));
+  }
+}
+
+Future<void> forgot({
+  required String Email,
+  required BuildContext context,
+}) async {
+  try {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: Email);
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Reset Link sent to your email')));
   } catch (e) {
     ScaffoldMessenger.of(
       context,

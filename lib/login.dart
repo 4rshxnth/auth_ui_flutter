@@ -1,4 +1,5 @@
 import 'package:auth_ui_flutter/forgot.dart';
+import 'package:auth_ui_flutter/services.dart';
 import 'package:auth_ui_flutter/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final formkey = GlobalKey<FormState>();
   @override
@@ -61,7 +62,7 @@ class _LoginState extends State<Login> {
                   }
                   return null;
                 },
-                controller: emailcontroller,
+                controller: emailController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -116,7 +117,15 @@ class _LoginState extends State<Login> {
                 width: double.infinity,
                 height: 70,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (formkey.currentState!.validate()) {
+                      login(
+                        Email: emailController.text,
+                        Password: passwordController.text,
+                        context: context,
+                      );
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     side: BorderSide(color: Colors.black, width: 1),
